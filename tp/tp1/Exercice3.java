@@ -4,46 +4,21 @@ public class Exercice3 {
 
         for (String arg : args) {
             for (int i = 0; i < arg.length(); i++) {
-                switch (arg.charAt(i)) {
-                    case 'e':
-                        res += 'a';
-                        break;
-                    case 'E':
-                        res += 'A';
-                        break;
-                    case 'a':
-                        res += 'y';
-                        break;
-                    case 'A':
-                        res += 'Y';
-                        break;
-                    case 'y':
-                        res += 'u';
-                        break;
-                    case 'Y':
-                        res += 'U';
-                        break;
-                    case 'u':
-                        res += 'o';
-                        break;
-                    case 'U':
-                        res += 'O';
-                        break;
-                    case 'o':
-                        res += 'i';
-                        break;
-                    case 'O':
-                        res += 'I';
-                        break;
-                    case 'i':
-                        res += 'e';
-                        break;
-                    case 'I':
-                        res += 'E';
-                        break;
-                    default:
-                        res += arg.charAt(i);
-                }
+                res += switch (arg.charAt(i)) {
+                    case 'e' -> 'a';
+                    case 'E' ->'A';
+                    case 'a' -> 'y';
+                    case 'A' -> 'Y';
+                    case 'y' -> 'u';
+                    case 'Y' -> 'U';
+                    case 'u' -> 'o';
+                    case 'U' -> 'O';
+                    case 'o' -> 'i';
+                    case 'O' -> 'I';
+                    case 'i' -> 'e';
+                    case 'I' -> 'E';
+                    default -> arg.charAt(i);
+                };
             }
             res += ' ';
         }

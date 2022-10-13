@@ -11,3 +11,7 @@ D'après la documentation `Java` :
 Retourne la représentation en chaîne de caractères à partir d'un entier.
 #### `Character.getNumericValue(c)`
 Retourne l'entier spécifié par le caractère considéré.
+
+## [Exercice 3](Exercice3.java)
+#### `char charAt(int index)` de la classe `String`
+Retourne le caractère à l'indice `index` (en partant de `0`).
