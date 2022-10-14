@@ -17,6 +17,8 @@ class Informations {
         agilite = inf.agilite;
     }
 
+    // GETTERS
+
     public int getVitalite() {
         return vitalite;
     }
@@ -28,6 +30,8 @@ class Informations {
     public int getAgilite() {
         return agilite;
     }
+
+    // SETTERS
 
     public void setVitalite(int v) {
         vitalite = v;
@@ -81,7 +85,7 @@ class Personnage {
         }
     }
 
-    public void lutteIter(Personnage def) {
+    public void lutteIter(Personnage def) {                                             // fonction itérative
         boolean monTour = true;
         while (etatActuel.getVitalite() > 0 && def.etatActuel.getVitalite() > 0) {
             if (monTour) {
@@ -103,7 +107,7 @@ class Personnage {
         }
     }
 
-    public void lutteAux(Personnage def, boolean monTour) {
+    public void lutteAux(Personnage def, boolean monTour) {                                 // fonction auxiliaire pour la récursion
         if (etatActuel.getVitalite() < 0 || def.etatActuel.getVitalite() < 0) {
             return;
         }
@@ -124,7 +128,7 @@ class Personnage {
         }
     }
 
-    public void lutteRec(Personnage def) {
+    public void lutteRec(Personnage def) {                                                      // fonction récursive
         lutteAux(def, true);
 
         if (etatActuel.getVitalite() <= 0) {
@@ -141,7 +145,15 @@ class Combat {
         Personnage p1 = new Personnage("Luffy", 200, 200, 500);
         Personnage p2 = new Personnage("Ener", 100, 100, 100);
 
-        //p1.lutteIter(p2);
+        System.out.println("Combat itérative : ");
+        p1.lutteIter(p2);
+
+        System.out.println();
+
+        p1.rebirth();                               // soigner les personnages
+        p2.rebirth();
+
+        System.out.println("Combat récursive : ");
         p1.lutteRec(p2);
     }
 }

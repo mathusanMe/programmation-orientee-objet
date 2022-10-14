@@ -2,9 +2,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Exercice4 {
-    private static int question(int maxTentatives) {
-        Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
+    private static int question(int maxTentatives) {
         Random rd = new Random();
         int p = rd.nextInt(9) + 1;
         int q = rd.nextInt(9) + 1;
@@ -19,7 +19,6 @@ public class Exercice4 {
             }
             i++;
         }
-
         return i;      
     }
 
