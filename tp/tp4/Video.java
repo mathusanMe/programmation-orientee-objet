@@ -7,6 +7,10 @@ public class Video extends Media {
     }
 
     public String toString() {
-        return super.toString() + "-Video";
+        return super.toString() + "\nDuree (en minutes) : " + duree;
+    }
+
+    public int ordreMedia() {
+        return 5;
     }
 }

@@ -7,6 +7,10 @@ public class LongMetrage extends Video {
     }
 
     public String toString() {
-        return super.toString() + "-LongMetrage";
+        return super.toString() + "\nRealisateur : " + realisateur;
+    }
+
+    public int ordreMedia() {
+        return 3;
     }
 }
