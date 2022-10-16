@@ -31,6 +31,16 @@ public class Mediatheque {
             }
         }
     }
+
+    public ArrayList<Media> recherche(Predicat p) {
+        ArrayList<Media> tmp = new ArrayList<>();
+        for (Media m : baseDeDonnees) {
+            if (p.estVrai(m)) {
+                tmp.add(m);
+            }
+        }
+        return tmp;
+    }
         
     public static void main(String[] args) {
         LongMetrage lm = new LongMetrage("Princesse Mononoké", 90, "Hayao Miyazaki");
@@ -101,8 +111,20 @@ public class Mediatheque {
         System.out.println("La médiatheque");
         System.out.println(m);
         
+        // System.out.println("-------------------------");
+        // System.out.println("Tous les livres");
+        // m.tousLesLivres();
+
         System.out.println("-------------------------");
         System.out.println("Tous les livres");
-        m.tousLesLivres();
+        System.out.println(m.recherche(new EstUnLivre()));
+
+        System.out.println("-------------------------");
+        System.out.println("Le titre du media commence par f ou F");
+        System.out.println(m.recherche(new TitreCommencePar('f')));
+
+        System.out.println("-------------------------");
+        System.out.println("Tous les livres et Le titre du media commence par f ou F");
+        System.out.println(m.recherche(new Et(new EstUnLivre(), new TitreCommencePar('f'))));
     }
 }
