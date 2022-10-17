@@ -12,5 +12,4 @@ public class Mot extends ChaineCar {
     public String toString() {
         return mot;
     }
-    
 }
