@@ -1,27 +1,48 @@
-public class Paragraphe extends ChaineCar {
-    private Ligne paragraphe;
+import java.util.LinkedList;
 
-    public Paragraphe(Ligne paragraphe) {
-        this.paragraphe = paragraphe;
+public class Paragraphe extends ChaineCar {
+    LinkedList<Ligne> lignes;
+
+    public Paragraphe(Ligne ligne) {
+        lignes = new LinkedList<Ligne>();
+        this.lignes.add(ligne);
     }
 
     public int len() {
-        return paragraphe.len();
+        int cnt = 0;
+        for (int i = 0; i < lignes.size(); i++) {
+            cnt += lignes.get(i).len();
+        }
+        return cnt;
     }
 
     public String toString() {
-        return paragraphe.toString();
+        String res = "";
+        for (int i = 0; i < lignes.size(); i++) {
+            res += lignes.get(i).toString();                     // \n permet de faire les sauts de lignes où il faut!
+        }
+        return res;
     }
 
     public boolean isEmpty() {
-        return paragraphe.isEmpty();
+        boolean boo = true;
+        for (int i = 0; i < lignes.size(); i++) {
+            boo = boo && lignes.get(i).len() == 0;
+        }
+        return boo;
     }
 
     public void addChaine(ChaineCar cc) {
-        paragraphe.addChaine(cc);
+        lignes.getLast().addChaine(cc);
+    }
+
+    public void addLigne() {
+        lignes.add(new Ligne());
     }
 
     public void removeDernierEspace() {
-        paragraphe.removeDernierEspace();
+        if (!lignes.isEmpty()) {
+            lignes.getLast().removeDernierEspace();
+        }
     }
 }

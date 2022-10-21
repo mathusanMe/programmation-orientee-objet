@@ -3,9 +3,9 @@ import java.io.File;
 import java.util.LinkedList;
 
 public class Formateur {
-    private Scanner sc;
-    private Scanner sc1;
-    private LinkedList<Paragraphe> texte;
+    Scanner sc;
+    Scanner sc1;
+    LinkedList<Paragraphe> texte;
 
     // filename est le nom du fichier
     // chemin compris s'il n'est pas dans le meme repertoire
@@ -21,7 +21,7 @@ public class Formateur {
             System.exit(1);
         }
         texte = new LinkedList<Paragraphe>();
-        this.read();                                                    // on lit et on remplit texte avec les paragraphes
+        // this.read();                                                    // Cette ligne bloque le passage des parametres des classes enfants
     }
 
     public void read() {
@@ -38,7 +38,9 @@ public class Formateur {
         Paragraphe p = new Paragraphe(new Ligne());                     // Paragraphe que l'on va remplir dans la suite
         while (sc1.hasNext()) {                                             // s'il y a du contenu à lire, on procède
             p.addChaine(new Mot(sc1.next()));                               // par la création d'un nouveau mot
-            p.addChaine(new Espace());                                      // auquel on ajoute un espace systématiquement
+            if (!p.isEmpty()) {
+                p.addChaine(new Espace());                                      // auquel on ajoute un espace systématiquement
+            } 
         }
         p.removeDernierEspace();                                            // Oublions pas d'enlever le dernier espace inutile
         return p;
@@ -46,18 +48,20 @@ public class Formateur {
 
     public void print() {
         for (int i = 0; i < texte.size(); i++) {
-            System.out.println(texte.get(i));
-            if (i != texte.size() - 1) {
+            LinkedList<Ligne> currLignes = texte.get(i).lignes;
+            for (int j = 0; j < currLignes.size(); j++) {
+                System.out.println(currLignes.get(j));
                 System.out.println();
             }
+            System.out.println();
         }
     }
 
-    public static void main(String[] args) {
-        // Formateur f = new Formateur("./textes/texte");                   All works great! Fair enough!
-        // Formateur f = new Formateur("./textes/texteBis");
-        // Formateur f = new Formateur("./textes/videBis");
-        // Formateur f = new Formateur("./textes/texte");
-        f.print();
-    }
+    // public static void main(String[] args) {
+    //     Formateur f = new Formateur("./textes/texte");                   All works great! Fair enough!
+    //     Formateur f = new Formateur("./textes/texteBis");
+    //     Formateur f = new Formateur("./textes/videBis");
+    //     Formateur f = new Formateur("./textes/texte");
+    //     f.print();
+    // }
 }

@@ -44,5 +44,12 @@ public class Ligne extends ChaineCar {
             ligne.removeLast();
         }
     }
+
+    public boolean dernierEstEspace() {
+        if (!ligne.isEmpty() && ligne.getLast() instanceof Espace) {
+            return true;
+        }
+        return false;
+    }
     
 }
