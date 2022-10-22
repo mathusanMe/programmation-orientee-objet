@@ -21,15 +21,15 @@ public class FormateurJoli extends Formateur {
     }
 
     private ParagrapheJoli readParagraphe() {
-        sc1 = new Scanner(sc.next());                                   // Scanner (2) prend le contenu courant du Scanner (1)
-        ParagrapheJoli p = new ParagrapheJoli(new Ligne(), largeurPage);                     // Paragraphe que l'on va remplir dans la suite
-        while (sc1.hasNext()) {                                             // s'il y a du contenu à lire, on procède
-            p.addChaine(new Mot(sc1.next()));                               // par la création d'un nouveau mot
+        sc1 = new Scanner(sc.next());                                           // Scanner (2) prend le contenu courant du Scanner (1)
+        ParagrapheJoli p = new ParagrapheJoli(new Ligne(), largeurPage);            // Paragraphe que l'on va remplir dans la suite
+        while (sc1.hasNext()) {                                                 // s'il y a du contenu à lire, on procède
+            p.addChaine(new Mot(sc1.next()));                                   // par la création d'un nouveau mot
             if (!p.isEmpty()) {
                 p.addChaine(new Espace());                                      // auquel on ajoute un espace systématiquement
             }
         }
-        p.removeDernierEspace();                                            // Oublions pas d'enlever le dernier espace inutile
+        p.removeDernierEspace();                                                // Oublions pas d'enlever le dernier espace inutile
         return p;
     }
 
