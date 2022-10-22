@@ -13,7 +13,7 @@ public class Formateur {
         sc = null;
         try {
             sc = new Scanner(new File(filename));
-            sc.useDelimiter("\n");
+            sc.useDelimiter("\n *\n");                         // motif : nouveau paragraphe
         }
         catch(Exception e) {
             System.out.println("Erreur lors d'ouverture fichier:");

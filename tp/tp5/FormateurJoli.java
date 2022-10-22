@@ -3,10 +3,12 @@ import java.util.Scanner;
 public class FormateurJoli extends Formateur {
 
     private int largeurPage;
+    private int longueur;
 
-    public FormateurJoli(String filename, int largeurPage) {
+    public FormateurJoli(String filename, int largeurPage, int longueur) {
         super(filename);
         this.largeurPage = largeurPage;
+        this.longueur = longueur;
         this.read();                                                    // on lit et on remplit texte avec les paragraphes
     }
 
@@ -22,19 +24,19 @@ public class FormateurJoli extends Formateur {
 
     private ParagrapheJoli readParagraphe() {
         sc1 = new Scanner(sc.next());                                           // Scanner (2) prend le contenu courant du Scanner (1)
-        ParagrapheJoli p = new ParagrapheJoli(new Ligne(), largeurPage);            // Paragraphe que l'on va remplir dans la suite
-        while (sc1.hasNext()) {                                                 // s'il y a du contenu à lire, on procède
-            p.addChaine(new Mot(sc1.next()));                                   // par la création d'un nouveau mot
+        ParagrapheJoli p = new ParagrapheJoli(new Ligne(), largeurPage, longueur);            // Paragraphe que l'on va remplir dans la suite
+        while (sc1.hasNext()) {                                                         // s'il y a du contenu à lire, on procède
+            p.addChaine(new Mot(sc1.next()));                                           // par la création d'un nouveau mot
             if (!p.isEmpty()) {
-                p.addChaine(new Espace());                                      // auquel on ajoute un espace systématiquement
+                p.addChaine(new Espace());                                              // auquel on ajoute un espace systématiquement
             }
         }
-        p.removeDernierEspace();                                                // Oublions pas d'enlever le dernier espace inutile
+        p.removeDernierEspace();                                                        // Oublions pas d'enlever le dernier espace inutile
         return p;
     }
 
     public static void main(String[] args) {
-        FormateurJoli f = new FormateurJoli("./textes/texte", 40);
+        FormateurJoli f = new FormateurJoli("./textes/texte", 80, 90);
         f.print();
     }
 }

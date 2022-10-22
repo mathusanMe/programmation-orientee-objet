@@ -51,5 +51,25 @@ public class Ligne extends ChaineCar {
         }
         return false;
     }
+
+    public void justifier(int longueur) {
+        int len = this.len();
+        if (len >= longueur) {
+            return;
+        }
+        int nombreParEspace = longueur / len;
+        int espacesRestants = longueur % len;
+        for (int i = 0; i < ligne.size(); i++) {
+            ChaineCar curr = ligne.get(i);
+            if (curr instanceof Espace) {
+                if (espacesRestants > 0) {
+                    ((Espace) curr).setSize(nombreParEspace + 1);
+                    espacesRestants--;
+                } else {
+                    ((Espace) curr).setSize(nombreParEspace);
+                }
+            }
+        } 
+    }
     
 }
