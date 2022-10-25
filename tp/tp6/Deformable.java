@@ -1,3 +1,3 @@
-interface class Deformable {
+public interface Deformable {
     Figure deformation(double coeffH, double coeffV);
 }

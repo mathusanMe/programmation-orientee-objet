@@ -6,4 +6,11 @@ public class Carre extends Rectangle {
         super(posX, posY, cote, cote);
         this.cote = cote;
     }
+
+    public void affiche() {
+        System.out.println("Carré :");
+        System.out.println("Côté : " + cote);
+        System.out.println("Centre du carré : (" + getPosX() + ", " + getPosY() + ")");
+        System.out.println("----------------------------------");
+    }
 }
