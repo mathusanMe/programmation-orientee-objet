@@ -8,7 +8,7 @@ public class Carre extends Rectangle {
     }
 
     public void affiche() {
-        System.out.println("Carré :");
+        System.out.println("-------------- Carré -------------");
         System.out.println("Côté : " + cote);
         System.out.println("Centre du carré : (" + getPosX() + ", " + getPosY() + ")");
         System.out.println("----------------------------------");

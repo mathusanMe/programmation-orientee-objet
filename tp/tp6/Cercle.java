@@ -8,7 +8,7 @@ public class Cercle extends Ellipse {
     }
 
     public void affiche() {
-        System.out.println("------------ Cercle -------------");
+        System.out.println("------------- Cercle -------------");
         System.out.println("Rayon : " + rayon);
         System.out.println("Centre du cercle : (" + getPosX() + ", " + getPosY() + ")");
         System.out.println("----------------------------------");

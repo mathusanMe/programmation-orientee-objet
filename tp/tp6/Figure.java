@@ -57,7 +57,15 @@ public abstract class Figure {
     public static void main(String[] args) {
         Rectangle r = new Rectangle(0, 0, 5, 10);
         r.affiche();
-        r.deformation(1, 0.5);
-        r.affiche();
+        r.deformation(1, 0.5).affiche();;
+
+        Ellipse e = new Ellipse(0, 0, 5, 10);
+        e.deplacement(2, 3);
+        e.affiche();
+        e.deformation(1, 0.5).affiche();;
+        e.affiche();
+
+        Triangle t = new Triangle(0, 0, 5, 10);
+        t.affiche();
     }
 }

@@ -24,7 +24,7 @@ public class Ellipse extends Figure implements Deformable {
     }
 
     public void affiche() {
-        System.out.println("Ellipse :");
+        System.out.println("------------- Ellipse ------------");
         System.out.println("Grand Rayon : " + grand_rayon + "; Petit Rayon : " + petit_rayon);
         System.out.println("Centre de l'ellipse : (" + getPosX() + ", " + getPosY() + ")");
         System.out.println("----------------------------------");

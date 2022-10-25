@@ -23,7 +23,7 @@ public class Triangle extends Figure implements Deformable {
     }
 
     public void affiche() {
-        System.out.println("Triangle :");
+        System.out.println("------------ Triangle ------------");
         System.out.println("Base : " + base + "; Hauteur : " + hauteur);
         System.out.println("Centre du triangle : (" + getPosX() + ", " + getPosY() + ")");
         System.out.println("----------------------------------");

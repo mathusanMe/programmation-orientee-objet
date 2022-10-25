@@ -24,7 +24,7 @@ public class Rectangle extends Figure implements Deformable {
     }
 
     public void affiche() {
-        System.out.println("Rectangle :");
+        System.out.println("----------- Rectangle ------------");
         System.out.println("Largeur : " + largeur + "; Longueur : " + longueur);
         System.out.println("Centre du rectangle : (" + getPosX() + ", " + getPosY() + ")");
         System.out.println("----------------------------------");
