@@ -1,0 +1,71 @@
+public class Entree {
+    private Element element;        // l'élément associé à l'entrée
+    private String nom;             // le nom associé à l'élément
+    private Dossier parent;         // le dossier parent de l'élément
+
+    public Entree(Dossier p, String n, Element e) {
+        parent = p;
+        nom = n;
+        element = e;
+    }
+
+    /**
+     * Retourne le élément de l'entrée.
+     * @return le élément de l'entrée
+     */
+    public Element getElement() {
+        return element;
+    }
+
+    /**
+     * Retourne le nom de l'entrée.
+     * @return le nom de l'entrée
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * Retourne description de l'entrée.
+     * @return description de l'entrée
+     */
+    public String toString() {
+        if (element == null) {
+            return nom + "(" + "entrée vide" + ")";
+        } else {
+            return nom + " (" + element.getType() + ")";
+        }
+    }
+
+    /**
+     * Supprime l'entrée.
+     */
+    public void supprimer() {
+        parent.supprimer(this);
+        // parent = null;
+    }
+
+    /**
+     * Remplace l'élément de l'entrée par un autre.
+     * @param e le nouvel élément
+     */
+    public void remplacer(Element e) {
+        if (e instanceof Dossier) {
+            (Dossier) e.setParent(parent);
+        } else {
+            element = e;
+        }   
+    }
+
+    // ! Problème avec la compréhension de cette méthode!
+    /**
+     * Ajoute un élément à une nouvelle entrée et retourne cette dernière.
+     * @param e l'élément à ajouter
+     * @return la nouvelle entrée
+     */
+    public Entree ajouter(Element e) {
+        Entree tmp = new Entree();
+        return tmp.remplacer(e);
+    }
+
+}
