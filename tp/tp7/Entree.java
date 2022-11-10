@@ -42,7 +42,8 @@ public class Entree {
      */
     public void supprimer() {
         parent.supprimer(this);
-        // parent = null;
+        parent = null;
+        element = null;
     }
 
     /**
@@ -52,20 +53,8 @@ public class Entree {
     public void remplacer(Element e) {
         if (e instanceof Dossier) {
             (Dossier) e.setParent(parent);
-        } else {
-            element = e;
-        }   
-    }
 
-    // ! Problème avec la compréhension de cette méthode!
-    /**
-     * Ajoute un élément à une nouvelle entrée et retourne cette dernière.
-     * @param e l'élément à ajouter
-     * @return la nouvelle entrée
-     */
-    public Entree ajouter(Element e) {
-        Entree tmp = new Entree();
-        return tmp.remplacer(e);
+        }
+        element = e;
     }
-
 }
