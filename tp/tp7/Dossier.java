@@ -3,6 +3,7 @@ import java.util.*;
 public class Dossier extends Element implements Affichable {
     private List<Entree> entrees;   // les entrées du dossier
     private Entree parent;          // le dossier parent du dossier
+    private static int untitled = 1; // le nombre de dossiers sans nom
 
     public Dossier(Entree p) {
         entrees = new ArrayList<Entree>();
@@ -56,6 +57,12 @@ public class Dossier extends Element implements Affichable {
         parent = tmp;
     }
 
+    public String getNomLibre() {
+        String nom = "Untitled" + untitled;
+        untitled++;
+        return nom;
+    }
+
     /**
      * Supprime une entrée du dossier.
      * @param e l'entrée à supprimer
@@ -70,7 +77,7 @@ public class Dossier extends Element implements Affichable {
      * @param nom le nom de l'entrée
      */
     public void ajouter(Element e, String nom) {
-        Entree tmp = new Entree(null, nom, this);
+        Entree tmp = new Entree(this, nom, null);
         entrees.add(tmp);
         tmp.remplacer(e);
     }
