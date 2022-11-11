@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Dossier extends Element implements Affichable {
     private List<Entree> entrees;   // les entrées du dossier
@@ -7,10 +7,11 @@ public class Dossier extends Element implements Affichable {
     public Dossier(Entree p) {
         entrees = new ArrayList<Entree>();
         parent = p;
-        entrees.add(new EntreeSpeciale(null, "." , this))
+        entrees.add(new EntreeSpeciale((parent != null ? (Dossier) parent.getElement() : null), "." , this));
         if (parent != null) {
-            entrees.add(new EntreeSpeciale(null, ".." , parent))
+            entrees.add(new EntreeSpeciale(null, ".." , parent.getElement()));
         }
+        
     }
 
     /**
@@ -19,6 +20,10 @@ public class Dossier extends Element implements Affichable {
      */
     public String getType() {
         return "dossier";
+    }
+
+    public Entree getParent() {
+        return parent;
     }
 
     /**
@@ -46,8 +51,9 @@ public class Dossier extends Element implements Affichable {
      * Change le dossier parent du dossier.
      * @param p le nouveau dossier parent
      */
-    public void setParent(Entree p) {
-        parent = p;
+    public void setParent(Dossier p) {
+        Entree tmp = new Entree(this, parent.getNom(), p);
+        parent = tmp;
     }
 
     /**
@@ -74,7 +80,7 @@ public class Dossier extends Element implements Affichable {
      */
     public void afficher() {
         for (Entree e : entrees) {
-            System.out.print(e);
+            System.out.println(e);
         }
     }
 }

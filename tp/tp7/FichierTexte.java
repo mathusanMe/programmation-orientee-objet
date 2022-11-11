@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class FichierTexte extends Element implements Affichable, Editable {
     private String contenu;             // contenu du fichier
 

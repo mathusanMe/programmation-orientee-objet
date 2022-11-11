@@ -43,7 +43,6 @@ public class Entree {
     public void supprimer() {
         parent.supprimer(this);
         parent = null;
-        element = null;
     }
 
     /**
@@ -52,8 +51,9 @@ public class Entree {
      */
     public void remplacer(Element e) {
         if (e instanceof Dossier) {
-            (Dossier) e.setParent(parent);
-
+            if (parent != null) {
+                ((Dossier) e).setParent(parent);
+            }
         }
         element = e;
     }
