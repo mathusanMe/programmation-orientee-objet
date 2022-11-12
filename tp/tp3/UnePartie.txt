@@ -1,0 +1,47 @@
+trdt
+pppp
+PPPP
+TRDT
+Le tour du blanc
+x0 y0 x1 y1
+1 1 2 2
+trdt
+p#pp
+PPpP
+TRDT
+Le tour du noir
+x0 y0 x1 y1
+3 2 2 2
+trdt
+p#pp
+PPDP
+TR.T
+Le tour du blanc
+x0 y0 x1 y1
+1 3 2 2
+trdt
+p#p#
+PPpP
+TR.T
+Le tour du noir
+x0 y0 x1 y1
+3 1 2 2
+trdt
+p#p#
+PPRP
+T#.T
+Le tour du blanc
+x0 y0 x1 y1
+0 1 1 1
+t.dt
+prp#
+PPRP
+T#.T
+Le tour du noir
+x0 y0 x1 y1
+2 2 1 1
+t.dt
+pRp#
+PP#P
+T#.T
+Noir a gagné!
