@@ -26,6 +26,14 @@ public class Entree {
     }
 
     /**
+     * Set le nom de l'entrée.
+     * @param nom le nom de l'entrée
+     */
+    public void setNom(String nvNom) {
+        nom = nvNom;
+    }
+
+    /**
      * Retourne description de l'entrée.
      * @return description de l'entrée
      */

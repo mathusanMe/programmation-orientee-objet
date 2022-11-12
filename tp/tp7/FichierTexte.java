@@ -16,13 +16,20 @@ public class FichierTexte extends Element implements Affichable, Editable {
     }
 
     public void editer(Scanner sc, boolean echo) {
+        System.out.println("Entrez le texte du fichier (terminez par une ligne contenant seulement un point)");
         contenu = "";
         String curr = sc.nextLine();
+        boolean first = true;
         while (!curr.equals(".")) {
-            contenu += curr + "\n";
+            if (!first) {
+                contenu += "\n";
+            }
+            contenu += curr;
             if (echo) {
                 System.out.println(curr);
             }
+            curr = sc.nextLine();
+            first = false;
         }
     }
 }

@@ -53,6 +53,9 @@ public class Dossier extends Element implements Affichable {
      * @param p le nouveau dossier parent
      */
     public void setParent(Dossier p) {
+        if (parent == null) {
+            return;
+        }
         Entree tmp = new Entree(this, parent.getNom(), p);
         parent = tmp;
     }
