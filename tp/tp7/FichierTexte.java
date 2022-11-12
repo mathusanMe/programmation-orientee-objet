@@ -11,6 +11,10 @@ public class FichierTexte extends Element implements Affichable, Editable {
         return "texte";
     }
 
+    public String getContenu() {
+        return contenu;
+    }
+
     public void afficher() {
         System.out.println(contenu);
     }

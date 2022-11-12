@@ -350,13 +350,16 @@ public class Shell {
             }
         }
         Entree tmp = d.getEntree(noms[noms.length - 1], false);
-        if (tmp == null) {
+        boolean test = tmp == null;
+        if (test) {
             tmp = new Entree(d, noms[noms.length - 1], new FichierTexte(""));
         }
         if (tmp.getElement() instanceof FichierTexte) {
             FichierTexte f = (FichierTexte) tmp.getElement();
             f.editer(scanner, false);
-            d.ajouter(f, noms[noms.length - 1]);
+            if (test) {
+                d.ajouter(f, noms[noms.length - 1]);
+            }
         } else {
             System.out.println("ed: " + chemin + ": Not a file");
         }
@@ -418,26 +421,113 @@ public class Shell {
 
         Entree src = dossiers[0].getEntree(nomDossiers[0], false);
         if (src.getElement() != racine) {
-            dossiers[1].ajouter(src.getElement(), nomDossiers[1]);
+            Entree nvEntree = new Entree(dossiers[1], nomDossiers[0], null);
+            Element nvElement = null;
+            if (src.getElement() instanceof Dossier) {
+                nvElement = new Dossier(nvEntree);
+            } else {
+                nvElement = new FichierTexte(((FichierTexte) src.getElement()).getContenu());
+            }
+            nvEntree.remplacer(nvElement);
+            dossiers[1].ajouter(nvElement, nomDossiers[1]);
         } else {
             System.out.println("cp: " + cheminSrc + ": Permission denied");
             return;
         }
     }
 
+    public void start() {
+        System.out.println("Enter 'quit' to stop.");
+        scanner = new Scanner(System.in);
+        String curr = scanner.nextLine();
+        while (!curr.equals("quit")) {
+            String[] args = curr.split(" ");
+            switch (args[0]) {
+                case "cat":
+                    if (args.length == 2) {
+                        cat(args[1]);
+                    } else {
+                        System.out.println("Usage: cat <file>");
+                    }
+                    break;
+                case "ls":
+                    if (args.length > 2) {
+                        System.out.println("ls: too many arguments");
+                    } else if (args.length == 1) {
+                        ls("");
+                    } else {
+                        ls(args[1]);
+                    }
+                    break;
+                case "cd":
+                    if (args.length > 2) {
+                        System.out.println("cd: too many arguments");
+                    } else if (args.length == 1) {
+                        cd("/");
+                    } else {
+                        cd(args[1]);
+                    }
+                    break;
+                case "mkdir":
+                    if (args.length > 2) {
+                        System.out.println("mkdir: too many arguments");
+                    } else if (args.length == 1) {
+                        System.out.println("mkdir: missing operand");
+                    } else {
+                        mkdir(args[1]);
+                    }
+                    break;
+                case "rm":
+                    if (args.length > 2) {
+                        System.out.println("rm: too many arguments");
+                    } else if (args.length == 1) {
+                        System.out.println("rm: missing operand");
+                    } else {
+                        rm(args[1]);
+                    }
+                    break;
+                case "ed":
+                    if (args.length > 2) {
+                        System.out.println("ed: too many arguments");
+                    } else if (args.length == 1) {
+                        System.out.println("ed: missing operand");
+                    } else {
+                        ed(args[1]);
+                    }
+                    break;
+                case "cp":
+                    if (args.length > 3) {
+                        System.out.println("cp: too many arguments");
+                    } else if (args.length == 1) {
+                        System.out.println("cp: missing operand");
+                    } else if (args.length == 2) {
+                        System.out.println("cp: missing destination file operand after '" + args[1] + "'");
+                    } else {
+                        cp(args[1], args[2]);
+                    }
+                    break;
+                default:
+                    System.out.println("Command not found");
+            }
+            curr = scanner.nextLine();
+        }
+    }
+
     public static void main(String[] args) {
         Dossier racine = new Dossier(null);
-        Entree racineEntree = new Entree(null, "Racine", racine);
         Shell shell = new Shell(racine);
-        shell.ls("");
-        shell.mkdir("test");
-        shell.ls("");
-        shell.ls("test");
-        shell.ed("test/a");
-        shell.cp("test", "test2");
-        shell.ed("test2/a");
-        shell.cd("test");
-        shell.cat("a");
-        shell.cat("../test2/a");
+        // shell.ls("");
+        // shell.mkdir("test");
+        // shell.ls("");
+        // shell.ls("test");
+        // shell.ed("test/a");
+        // shell.ls("test");
+        // shell.cp("test", "test2");
+        // shell.ed("test2/a");
+        // shell.cd("test");
+        // shell.cat("a");
+        // shell.cat("../test2/a");
+
+        shell.start();
     }
 }
