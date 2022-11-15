@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 public class Arbre {
     private final Noeud racine;             // racine de l'arbre
+    private final String nomFichier;
 
     public Arbre(String nomFichier) throws FileNotFoundException {
         racine = new Noeud(new File(nomFichier));
+        this.nomFichier = nomFichier;
     }
 
     /**
@@ -43,6 +45,30 @@ public class Arbre {
         racine.traverser(extension);
     }
 
+    public void supprimer(String extension) throws UnableToDeleteFileException {
+        if (racine == null) {
+          return;
+        }
+        List<Noeud> aSupprimer = racine.supprimer(extension, new ArrayList<>());
+        for (Noeud n : aSupprimer) {
+            Noeud parent = n.getParent();
+            if (parent == null) {
+                continue;
+            }
+            String chemin = parent.getChemin();
+            File file = new File(chemin + "/" + n.getNom());
+            if (file.getParentFile().canWrite()) {
+                if (!parent.getFils().contains(n)) {
+                    throw new UnableToDeleteFileException("Impossible de supprimer le fichier " + file.getAbsolutePath());
+                }
+                parent.getFils().remove(n);
+            } else {
+                throw new UnableToDeleteFileException("Impossible de supprimer le fichier " + file.getAbsolutePath());
+            }
+        }
+
+    }
+
     private class Noeud {
         private String nom;                     // nom du fichier
         private final int taille;               // taille du fichier
@@ -67,6 +93,40 @@ public class Arbre {
                 return;
             }
             throw new FileNotFoundException();
+        }
+
+        public String getNom() {
+            return nom;
+        }
+
+        public ArrayList<Noeud> getFils() {
+            return fils;
+        }
+
+        public Noeud getParent() {
+            return racine.parcoursEnProfondeur(this);
+        }
+
+        private Noeud parcoursEnProfondeur(Noeud aSupprimer) {
+            if (fils.contains(aSupprimer)) {
+                return this;
+            }
+            for (Noeud f : this.fils) {
+                if (f.fils != null) {
+                    Noeud res = f.parcoursEnProfondeur(aSupprimer);
+                    if (res != null) {
+                        return res;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public String getChemin() {
+            if (this.getParent() == null) {
+                return nomFichier;
+            }
+            return this.getParent().getChemin() + "/" + this.getNom();
         }
         
         private void afficher(int niveau) {
@@ -100,6 +160,18 @@ public class Arbre {
               System.out.println(this.nom);
             }
         }
+
+        private List<Noeud> supprimer(String extension, List<Noeud> aSupprimer) {
+            if (repertoire) {
+              fils.forEach((Noeud n) -> {
+                aSupprimer.addAll(n.supprimer(extension, aSupprimer));
+              });
+            }
+            if (this.nom.endsWith(extension)) {
+                aSupprimer.add(this);
+            }
+            return aSupprimer;
+        }
     }
 
     public static void main(String[] args) {
@@ -109,7 +181,11 @@ public class Arbre {
             // arbre.map((String t) -> String.format("%s.blah", t));
             arbre.afficher();
             //arbre.traverser(".png");
-            arbre.supprimer(".png");
+            try {
+                arbre.supprimer(".jpg");
+            } catch (UnableToDeleteFileException e) {
+                System.out.println(e.getMessage());
+            }
             arbre.afficher();
         } catch (FileNotFoundException e) {
             System.out.println("Fichier non trouvé");
