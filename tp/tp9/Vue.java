@@ -37,7 +37,7 @@ public class Vue extends JFrame {
         this.getContentPane().setLayout(new GridLayout(1, 2));
         this.getContentPane().add(panneauChoix);
 
-        panneauChoix.setLayout(new GridLayout(2, 1));
+        panneauChoix.setLayout(new BoxLayout(panneauChoix, BoxLayout.Y_AXIS));
         panneauChoix.add(panneauChoixCurseurs);
 
         panneauChoixCurseurs.setLayout(new GridLayout(3, 1));
@@ -48,6 +48,7 @@ public class Vue extends JFrame {
         curseurRouge.setPaintTicks(true);
         curseurRouge.setPaintLabels(true);
         curseurRouge.setName("Rouge");
+        
         curseurRouge.addChangeListener((event) -> {
             controlleur.sliderMoved();
             miseAJour();
@@ -73,14 +74,18 @@ public class Vue extends JFrame {
         curseurBleu.addChangeListener((event) -> {
             controlleur.sliderMoved();
         });
-        
-        panneauChoix.add(panneauChoixBoutons);
-        panneauChoixBoutons.setLayout(new GridLayout(1, 3));
+
+        panneauChoix.add(panneauChoixBoutons, BorderLayout.SOUTH);
+        panneauChoixBoutons.setLayout(new FlowLayout());
 
         panneauChoixBoutons.add(memoriser);
         memoriser.setText("Mémoriser");
+
+        senrappeler.setEnabled(false);
+        
         memoriser.addActionListener((event) -> {
             controlleur.memoriser();
+            senrappeler.setEnabled(true);
         });
 
         panneauChoixBoutons.add(senrappeler);
@@ -120,9 +125,10 @@ public class Vue extends JFrame {
     }
 
     public void updateCurseurs() {
-        curseurRouge.setValue(modele.getRouge());
-        curseurVert.setValue(modele.getVert());
-        curseurBleu.setValue(modele.getBleu());
+        int r = modele.getRouge(), v = modele.getVert(), b = modele.getBleu();
+        curseurRouge.setValue(r);
+        curseurVert.setValue(v);
+        curseurBleu.setValue(b);
 
         miseAJour();
     }
